@@ -1,0 +1,34 @@
+extends ../shared/template
+
+block content
+  h1= title
+  #map
+    .row.clear
+      .small-12.columns
+  
+
+  script.
+    var places = [];
+   
+  .row
+    .small-6.columns
+      ul
+        each listing in listings
+          li
+            a(href='/listings/' + listing._id): span= listing.name
+            span  -  Cost/Day: #{listing.amount}$
+            script.
+              var place = {};
+              place.address = '#{listing.address}';
+              place.lat = #{listing.coordinates[0]};
+              place.lng = #{listing.coordinates[1]};
+              place._id = '#{listing._id}';
+              places.push(place);
+    .small-6.columns
+        label Search locations Closest to you
+        input#searchRadius
+        button#search.small.radius(style='display:none;') Search
+
+block scripts
+  script(src='/js/source/listings.js')
+

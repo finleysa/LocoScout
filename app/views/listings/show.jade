@@ -1,0 +1,17 @@
+extends ../shared/template
+
+block content
+  .row
+    .small-6.columns
+      img(src= listing.cover).item-img-large
+    .small-6.columns
+      h1= listing.name
+      h2= listing.description
+  .row
+    .small-6.columns
+      form(action='listings/reserve', method='post')
+      label Reserve Your Date
+      input(type='date', name='reservedDate')
+      button.radius Reserve
+
+block scripts
